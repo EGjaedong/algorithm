@@ -2,8 +2,8 @@ package org.example.datastruct.array;
 
 public class Array {
 
-    private int[] data;
-    private int size;
+    private final int[] data;
+    private int size; // size指向下一个空位置
 
     public Array(int capacity) {
         data = new int[capacity];
@@ -27,6 +27,24 @@ public class Array {
     }
 
     public void addLast(int e) {
+        add(size, e);
+    }
 
+    public void addFirst(int e) {
+        add(0, e);
+    }
+
+    public void add(int index, int e) {
+        if (size == data.length) {
+            throw new IllegalArgumentException("AddLast failed. Array is full.");
+        }
+        if (index < 0 || index > size) {
+            throw new IllegalArgumentException("Out of index.");
+        }
+        for (int i = size - 1; i >= index; i--) {
+            data[i + 1] = data[i];
+        }
+        data[index] = e;
+        size++;
     }
 }
