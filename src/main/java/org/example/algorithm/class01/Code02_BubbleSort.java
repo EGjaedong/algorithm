@@ -1,4 +1,4 @@
-package org.example.algorithm.sort;
+package org.example.algorithm.class01;
 
 public class Code02_BubbleSort {
 

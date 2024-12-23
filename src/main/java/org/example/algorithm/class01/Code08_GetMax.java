@@ -1,4 +1,4 @@
-package org.example.algorithm.sort;
+package org.example.algorithm.class01;
 
 public class Code08_GetMax {
     // 递归版本求最大值
