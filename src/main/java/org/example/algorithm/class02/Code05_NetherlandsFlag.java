@@ -16,6 +16,7 @@ public class Code05_NetherlandsFlag {
             return arr;
         }
 
+        // l本质就是current指针
         int less = l - 1;
         int more = r + 1;
         while (l < more) {
