@@ -5,7 +5,7 @@ public class Code07_HeapSort {
     // 用一个数组来表示堆，本质上就是一个完全二叉树
     // 根结点是0位置，左孩子是2*i+1，右孩子是2*i+2，父结点是(i-1)/2。
     // 堆的大小是heapSize，堆的有效部分是[0, heapSize)。
-    // 另外，优先级队列，本质上就是一个大根堆，我们认为堆顶是优先级最高的堆。
+    // 另外，优先级队列，本质上就是一个堆，我们认为堆顶是优先级最高的堆。
     public static void heapSort(int[] arr) {
         if (arr == null || arr.length < 2) {
             return;
