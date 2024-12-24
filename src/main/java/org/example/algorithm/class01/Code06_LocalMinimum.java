@@ -1,6 +1,6 @@
 package org.example.algorithm.class01;
 
-public class Code06_BSAwesome {
+public class Code06_LocalMinimum {
     // 局部最小值问题：
     // 已知有一个数组，任意两个相邻的数都不想等，找到这个数组中的一个局部最小值
     // 求解思路：

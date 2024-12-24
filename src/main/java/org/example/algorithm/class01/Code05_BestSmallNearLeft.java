@@ -1,6 +1,6 @@
 package org.example.algorithm.class01;
 
-public class Code05_BSNearLeft {
+public class Code05_BestSmallNearLeft {
 
     // 在arr上，找满足>=value的最左位置
     public static int nearestIndex(int[] arr, int value) {

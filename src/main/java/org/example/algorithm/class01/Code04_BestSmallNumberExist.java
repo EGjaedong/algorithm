@@ -1,6 +1,6 @@
 package org.example.algorithm.class01;
 
-public class Code04_BSExist {
+public class Code04_BestSmallNumberExist {
 
     public static boolean exist(int[] sortedArr, int target) {
         if (sortedArr == null || sortedArr.length == 0) {
