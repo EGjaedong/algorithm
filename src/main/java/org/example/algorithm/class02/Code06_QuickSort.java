@@ -1,6 +1,7 @@
 package org.example.algorithm.class02;
 
 import java.util.Arrays;
+import org.example.algorithm.class01.Code03_InsertionSort;
 
 public class Code06_QuickSort {
 
@@ -20,6 +21,15 @@ public class Code06_QuickSort {
 
     // 左右递归
     public static void quickSort(int[] arr, int l, int r) {
+        if  (l == r) {
+            return;
+        }
+        // 当数组长度小于60时，使用插入排序。虽然O(N^2)，但小样本量时跑得快
+//        if (l > r - 60) {
+//             插入排序
+//            insertSort(arr, l, r);
+//            return;
+//        }
         if (l < r) {
             // 随机选取一个数，和最后一个数交换，以最后一个数为基准，将数组分为小于，等于，大于三个部分
             swap(arr, l + (int) (Math.random() * (r - l + 1)), r);
