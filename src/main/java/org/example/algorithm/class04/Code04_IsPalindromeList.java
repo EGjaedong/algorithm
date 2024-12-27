@@ -5,6 +5,14 @@ import java.util.Deque;
 
 public class Code04_IsPalindromeList {
 
+    public static class Node {
+        public int value;
+        public Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+    }
     // 判断一个链表是不是回文链表
     // 1 -> 2 -> 3 -> 2 -> 1 -> null
     // 1 -> 20 -> 3 -> 20 -> 1 -> null
@@ -204,14 +212,5 @@ public class Code04_IsPalindromeList {
         System.out.println(isPalindrome3(head) + " | ");
         printLinkedList(head);
         System.out.println("=========================");
-    }
-
-    public static class Node {
-        public int value;
-        public Node next;
-
-        public Node(int value) {
-            this.value = value;
-        }
     }
 }
