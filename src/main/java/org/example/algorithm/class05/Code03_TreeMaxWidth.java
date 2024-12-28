@@ -87,8 +87,6 @@ public class Code03_TreeMaxWidth {
     // 如果当前节点是本层的最后一个节点，则更新最大宽度，将下一层最右侧节点设置为null，当前层数节点个数清零。
     // 循环直到队列为空。
     // 不算最左侧和最右侧节点之间的null节点。
-    // 如果需要计算null节点，可以在每次进队列的时候，要判断当前null节点是不是最左侧或者最右侧的节点，如果不是，则进队列。
-    // 出队列的时候统计数据，需要判断当前是不是null节点，如果是，则不进行左右子节点进队列的操作。
     public static int getMaxWith2(Node head) {
         if (head == null) {
             return 0;
@@ -118,5 +116,16 @@ public class Code03_TreeMaxWidth {
             }
         }
         return maxWidth;
+    }
+
+    // 利用宽度优先遍历求二叉树的最大宽度，需要将非最左和最右侧节点的null节点也计算在内。
+    // 如果需要计算null节点，可以在每次进队列的时候，要判断当前null节点是不是最左侧或者最右侧的节点，
+    // 出队列的时候统计数据，需要判断当前是不是null节点，如果是，则不进行左右子节点进队列的操作。
+    // LeetCode 662. Maximum Width of Binary Tree
+    public static int getMaxWith3(Node head) {
+        if (head == null) {
+            return 0;
+        }
+        return 0;
     }
 }
