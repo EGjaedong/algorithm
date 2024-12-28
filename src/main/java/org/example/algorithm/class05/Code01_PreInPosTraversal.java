@@ -18,6 +18,7 @@ public class Code01_PreInPosTraversal {
     }
 
     // 递归方式实现二叉树的先序遍历
+    // 先序遍历就是二叉树的DFS
     public static void preOrderRecur(Node head) {
         if (head == null) {
             return;
