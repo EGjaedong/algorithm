@@ -72,7 +72,7 @@ public class Code01_PreInPosTraversal {
 
     // 非递归方式实现二叉树的中序遍历
     // 准备一个栈，按照左中右方式处理。
-    // 对于每一颗子树，都把左右的左节点压入栈中，然后依次弹出，弹出时打印，然后堆弹出节点的右子树循环这个过程。
+    // 对于每一颗子树，都把左右的左节点压入栈中，然后依次弹出，弹出时打印，然后对弹出节点的右子树循环这个过程。
     public static void inOrderUnRecur(Node head) {
         System.out.print("in-order: ");
         if (head != null) {
