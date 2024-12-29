@@ -2,6 +2,7 @@ package org.example.algorithm.class05;
 
 public class Code06_IsBalancedTree {
     // 平衡二叉树（balanced binary tree）
+    // 平衡二叉树定义：对于一颗二叉树，假设其深度为d（d>1）。每一个节点的左右子树的高度差不超过1，这样的二叉树被称为平衡二叉树。
     // 1、左树是平衡的
     // 2、右树是平衡的
     // 3、左树和右树得高度差不超过1
