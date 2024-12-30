@@ -47,4 +47,26 @@ public class Code10_SerializeAndReconstructTree {
         return head;
     }
 
+    // 比较笨的办法，先序遍历序列化，然后判断是否是子树
+    public static boolean isSubTree(Node root, Node subRoot) {
+        String[] rootStr = serializeByPre(root).split("_");
+        String[] subStr = serializeByPre(subRoot).split("_");
+        if (rootStr.length < subStr.length) {
+            return false;
+        }
+        for (int i = 0; i < rootStr.length; i++) {
+            if (rootStr[i].equals(subStr[0])) {
+                int j = 0;
+                for (; j < subStr.length; j++) {
+                    if (!rootStr[i + j].equals(subStr[j])) {
+                        break;
+                    }
+                }
+                if (j == subStr.length) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
