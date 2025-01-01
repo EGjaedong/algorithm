@@ -57,8 +57,10 @@ public class Code04_BestArrange {
         int maxCount = 0;
         Set<Integer> bestSubset = new HashSet<>(); // 用于保存最大有效子集的索引
         // 生成所有可能的子集 (共 2^n 个子集)
+        // 二进制表示的子集，0表示不选，1表示选
         for (int subsetMask = 0; subsetMask < (1 << n); subsetMask++) {
             Set<Integer> subset = new HashSet<>();
+            // 根据子集的二进制表示，将对应的项目加入到子集中
             for (int i = 0; i < n; i++) {
                 if ((subsetMask & (1 << i)) != 0) {
                     subset.add(i);
