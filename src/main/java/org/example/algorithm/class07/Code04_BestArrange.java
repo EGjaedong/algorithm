@@ -104,17 +104,38 @@ public class Code04_BestArrange {
         return true;
     }
 
+    private static Program[] generateRandomProgram(int maxSize, int minValue, int maxValue) {
+        Program[] programs = new Program[(int) ((maxSize + 1) * Math.random())];
+        for (int i = 0; i < programs.length; i++) {
+            int start = (int) ((maxValue + 1) * Math.random()) + minValue;
+            int end = (int) ((maxValue + 1) * Math.random()) + start;
+            programs[i] = new Program(start, end);
+        }
+        return programs;
+    }
+
+    private static boolean isEqual(List<Program> list1, List<Program> list2) {
+        if ((list1 == null && list2 != null) || (list1 != null && list2 == null)) {
+            return false;
+        }
+        if (list1 == null && list2 == null) {
+            return true;
+        }
+        if (list1.size() != list2.size()) {
+            return false;
+        }
+        list1.sort(new ProgramComparator());
+        list2.sort(new ProgramComparator());
+        for (int i = 0; i < list1.size(); i++) {
+            if (list1.get(i).start != list2.get(i).start || list1.get(i).end != list2.get(i).end) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
-        Program[] programs = new Program[] {
-                new Program(1, 3),
-                new Program(2, 4),
-                new Program(3, 6),
-                new Program(5, 7),
-                new Program(6, 8),
-                new Program(7, 9),
-                new Program(8, 10),
-                new Program(9, 11)
-        };
+        Program[] programs = generateRandomProgram(10, 1, 100);
         System.out.println("use greedy strategy:");
         System.out.println(bestArrange(programs, 1).size());
         System.out.println("detail of best arrange:");
@@ -128,5 +149,8 @@ public class Code04_BestArrange {
         for (Program program : maxAttendances(programs)) {
             System.out.print(program.start + " " + program.end + ",");
         }
+        System.out.println();
+
+        System.out.println("test pass ? " + isEqual(bestArrange(programs, 1), maxAttendances(programs)));
     }
 }
