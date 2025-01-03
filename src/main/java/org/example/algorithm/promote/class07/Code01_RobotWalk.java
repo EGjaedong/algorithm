@@ -21,37 +21,84 @@ public class Code01_RobotWalk {
     // 机器人最开始在 1 位置上，必须经过 3 步，最后到达3位置。怎么走也不可能，所以返回方法数 0。
 
     // 先用暴力递归解决问题
+    // N:位置为1~N，固定参数
+    // M:当前在M位置，可变参数
+    // K:还剩下多少步，可变参数
+    // P:最终目标P，固定参数
     public static int ways1(int N, int M, int K, int P) {
-        return walk1(N, P, M, K);
+        return walk1(N, P, K, M);
     }
 
     // n:位置为1~N，固定参数
     // target:最终目标P，固定参数
-    // start:当前在start位置，可变参数
     // remaining:还剩下多少步，可变参数
+    // cur:当前在start位置，可变参数
     // 返回当前start位置，走remaining步之后，最终来到target位置的方法数
-    private static int walk1(int n, int target, int start, int remaining) {
+    private static int walk1(int n, int target, int remaining, int cur) {
         // base case，没有步数了，判断当前在不在target位置，如果在，返回当前这种走法；
         // 如果不在，则返回0，表示当前走法不能到达target位置
         if (remaining == 0) {
-            return start == target ? 1 : 0;
+            return cur == target ? 1 : 0;
         }
+        // 下面处理非base case情况
         // 如果当前在1位置，只能往右走
-        if (start == 1) {
-            return walk1(n, target, start + 1, remaining - 1);
+        if (cur == 1) {
+            return walk1(n, target, remaining - 1, cur + 1);
         }
         // 如果当前在N位置，只能往左走
-        if (start == n) {
-            return walk1(n, target, start - 1, remaining - 1);
+        if (cur == n) {
+            return walk1(n, target, remaining - 1, cur - 1);
         }
         // 如果当前在中间位置，可以往左走，也可以往右走
         // 返回向左右和向右走两个方向走法的总和
-        return walk1(n, target, start + 1, remaining - 1) + walk1(n, target, start -1, remaining -1);
+        return walk1(n, target, remaining - 1, cur + 1) +
+                walk1(n, target, remaining - 1, cur - 1);
+    }
+
+    // 暴力递归改记忆化搜索
+    public static int ways2(int N, int M, int K, int P) {
+        // 只要是暴力递归，都可以改成记忆化搜索。
+        // 记忆表长什么样子，取决于暴力递归过程中的可变参数有几个。
+        // 只要足够大能放下数据就行，尽量不要浪费空间就好。
+        int[][] dp = new int[K + 1][N + 1];
+        // 把dp表的所有位置初始化为-1
+        for (int i = 0; i <= K; i++) {
+            for (int j = 0; j <= N; j++) {
+                dp[i][j] = -1;
+            }
+        }
+        // N:位置为1~N，固定参数
+        // P:最终目标P，固定参数
+        // M:当前在M位置，可变参数
+        // K:还剩下多少步，可变参数
+        return walk2(N, P, K, M, dp);
+    }
+
+    // 使用dp作为缓存
+    private static int walk2(int n, int target, int remaining, int cur, int[][] dp) {
+        // 取缓存
+        if (dp[remaining][cur] != -1) {
+            return dp[remaining][cur];
+        }
+        // 后面放缓存
+        if (remaining == 0) {
+            dp[remaining][cur] = cur == target ? 1 : 0;
+            return dp[remaining][cur];
+        }
+        if (cur == 1) {
+            dp[remaining][cur] = walk2(n, target, remaining - 1, cur + 1, dp);
+        } else if (cur == n) {
+            dp[remaining][cur] = walk2(n, target, remaining - 1, cur - 1, dp);
+        } else {
+            dp[remaining][cur] = walk2(n, target, remaining - 1, cur + 1, dp) +
+                    walk2(n, target, remaining - 1, cur - 1, dp);
+        }
+        return dp[remaining][cur];
     }
 
     public static void main(String[] args) {
         System.out.println(ways1(7, 4, 9, 5));
-//        System.out.println(ways2(7, 4, 9, 5));
+        System.out.println(ways2(7, 4, 9, 5));
 //        System.out.println(ways3(7, 4, 9, 5));
     }
 }
