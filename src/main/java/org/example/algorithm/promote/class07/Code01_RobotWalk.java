@@ -98,22 +98,22 @@ public class Code01_RobotWalk {
 
     // 动态规划，时间复杂度O(n*K)
     // 可以在纸上把记忆化搜索里的dp表画出来，依赖关系就是暴力递归里面的递归调用关系
-    public static int ways3(int n, int cur, int remaining, int target) {
+    public static int ways3(int n, int M, int K, int P) {
         // 参数无效直接返回0
-        if (n < 2 || cur < 1 || cur > n || remaining < 1 || target < 1 || target > n) {
+        if (n < 2 || M < 1 || M > n || K < 1 || P < 1 || P > n) {
             return 0;
         }
         // dp表，行代表剩余步数，列代表位置，Java中数组默认初始化为0
-        int[][] dp = new int[remaining + 1][n + 1];
+        int[][] dp = new int[K + 1][n + 1];
         // 初始化dp表中暴力递归的base case的值
-        dp[0][target] = 1;
+        dp[0][P] = 1;
         // 根据递归函数的递归调用关系，查看依赖关系，填表。
         // 可以看到列为1的位置，依赖于右上角的一格；
         // 列为n的位置，依赖于左上角的一格；
         // 其他位置依赖于左上角和右上角的和
         // 填表。
         // 填表过程中，根本就不需要关系递归含义是什么，只看了base case和递归调用关系(其实也就依赖关系)，就可以填表。
-        for (int i = 1; i <= remaining; i++) {
+        for (int i = 1; i <= K; i++) {
             for (int j = 1; j <= n; j++) {
                 if (j == 1) {
                     dp[i][j] = dp[i - 1][2];
@@ -124,7 +124,7 @@ public class Code01_RobotWalk {
                 }
             }
         }
-        return dp[remaining][cur];
+        return dp[K][M];
     }
 
 
