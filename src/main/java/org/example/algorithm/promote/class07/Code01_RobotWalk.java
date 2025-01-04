@@ -120,7 +120,7 @@ public class Code01_RobotWalk {
                 } else if (j == n) {
                     dp[i][j] = dp[i - 1][n - 1];
                 } else {
-                    dp[i][j] = dp[i - 1][j - 1] + dp[i + 1][j + 1];
+                    dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j + 1];
                 }
             }
         }
