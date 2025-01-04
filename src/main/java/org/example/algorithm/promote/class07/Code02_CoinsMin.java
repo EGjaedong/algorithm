@@ -11,6 +11,8 @@ public class Code02_CoinsMin {
     // arr=[5,2,3]，aim=0。不用任何货币就可以组成 0 元，返回 0。
     // arr=[3,5]，aim=2根本无法组成 2 元，钱不能找开的情况下默认返回-1。
 
+    // 这个题还有一个变种，是每种货币只能使用一次，求最少货币数
+
     // 首先暴力递归尝试，尝试模型为从左到右尝试
     public static int minCoins1(int[] arr, int aim) {
         if (arr == null || arr.length == 0 || aim < 0) {
@@ -105,6 +107,7 @@ public class Code02_CoinsMin {
         for (int col = 1; col <= aim; col++) {
             dp[n][col] = -1;
         }
+        // 这个看懂了个大概，没完全懂
         for (int i = n - 1; i >= 0; i--) { // 从下向上，逐行填充数据
             for (int rest = 0; rest <= aim; rest++) { // 每一行都从左往右
                 dp[i][rest] = -1;
@@ -112,6 +115,7 @@ public class Code02_CoinsMin {
                     dp[i][rest] = dp[i + 1][rest]; // 当前行的值先设置成下面的值
                 }
                 // 左边的值不越界并且有效
+                // rest - arr[i] >= 0这个条件，对应暴力递归中的rest < 0
                 if (rest - arr[i] >= 0 && dp[i][rest - arr[i]] != -1) {
                     if (dp[i][rest] == - 1) { // 如果之前下面的值无效
                         dp[i][rest] = dp[i][rest - arr[i]] + 1;
