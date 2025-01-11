@@ -39,7 +39,8 @@ public class Code06_Knapsack {
 
 
     // 带着value进行递归尝试
-    private static int process2(int[] weights, int[] values, int i, int alreadyWeight, int alreadyValue, int bag) {
+    private static int process2(int[] weights, int[] values, int i, int alreadyWeight,
+            int alreadyValue, int bag) {
         if (alreadyWeight > bag) {
             return 0;
         }
@@ -49,15 +50,64 @@ public class Code06_Knapsack {
         }
         return Math.max(
                 process2(weights, values, i + 1, alreadyWeight, alreadyValue, bag),
-                process2(weights, values, i + 1, alreadyWeight + weights[i], alreadyValue + values[i], bag)
+                process2(weights, values, i + 1, alreadyWeight + weights[i],
+                        alreadyValue + values[i], bag)
         );
     }
 
+    public static int maxValue3(int[] weights, int[] values, int bag) {
+        return process3(weights, values, 0, bag);
+    }
+
+    private static int process3(int[] weights, int[] values, int i, int bag) {
+        if (bag < 0) {
+            return Integer.MIN_VALUE;
+        }
+        if (bag == 0) {
+            return 0;
+        }
+        if (i == weights.length) {
+            return 0;
+        }
+        // 到当前i位置，前序已经确定，不再考虑，仅考虑本次要i还是不要i，然后递归后面的数据。
+        return Math.max(
+                process3(weights, values, i + 1, bag),
+                values[i] + process3(weights, values, i + 1, bag - weights[i])
+        );
+    }
+
+    // 动态规划
+    // dp[i][j]表示使用前i个物品，背包容量为j时，能装下的最大价值
+    public static int maxValue4(int[] weights, int[] values, int bag) {
+        int[][] dp = new int[weights.length + 1][bag + 1];
+        // 初始化边界
+        for (int i = 0; i <= weights.length; i++) {
+            dp[i][0] = 0;
+        }
+        for (int j = 0; j <= bag; j++) {
+            dp[weights.length][j] = 0;
+        }
+        // 从后往前填表
+        for (int i = weights.length - 1; i >= 0; i--) {
+            for (int j = 0; j <= bag; j++) {
+                if (j - weights[i] < 0) {
+                    dp[i][j] = dp[i + 1][j];
+                } else {
+                    dp[i][j] = Math.max(dp[i + 1][j], values[i] + dp[i + 1][j - weights[i]]);
+                }
+            }
+        }
+
+        return dp[0][bag];
+    }
+
     public static void main(String[] args) {
-        int[] weights = { 3, 2, 4, 7 };
-        int[] values = { 5, 6, 3, 19 };
+        int[] weights = {3, 2, 4, 7};
+        int[] values = {5, 6, 3, 19};
         int bag = 11;
         System.out.println(maxValue1(weights, values, bag));
         System.out.println(maxValue2(weights, values, bag));
+        System.out.println(maxValue3(weights, values, bag));
+        System.out.println(maxValue4(weights, values, bag));
     }
 }
