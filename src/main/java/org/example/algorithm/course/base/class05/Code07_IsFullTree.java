@@ -26,7 +26,8 @@ public class Code07_IsFullTree {
     }
 
     public static boolean isFullTree(Node node) {
-        return process(node).nodes == (1 << process(node).height) - 1;
+        ReturnData data = process(node);
+        return data.nodes == (1 << data.height) - 1;
     }
 
     public static ReturnData process(Node node) {
