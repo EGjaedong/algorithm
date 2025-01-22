@@ -1,4 +1,4 @@
-package org.example.old_dog;
+package org.example.od;
 
 public class Code02 {
     // 给是个数字，左边一堆，右边一堆，让这两堆的和差值尽可能的小

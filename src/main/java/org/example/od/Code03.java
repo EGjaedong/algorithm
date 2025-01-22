@@ -1,4 +1,4 @@
-package org.example.old_dog;
+package org.example.od;
 
 import java.util.ArrayList;
 import java.util.Comparator;
