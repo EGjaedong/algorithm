@@ -1,6 +1,6 @@
 package org.example.algorithm.exercise.recursion_and_dp;
 
-public class UniquePaths {
+public class Problem62_UniquePaths {
 
     // 力扣62题，不同路径
     // 描述：一个机器人位于一个 m x n 网格的左上角（起始点在下图中标记为“Start” ）。
