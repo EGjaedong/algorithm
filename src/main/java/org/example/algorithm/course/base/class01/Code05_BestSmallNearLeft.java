@@ -7,7 +7,7 @@ public class Code05_BestSmallNearLeft {
         int L = 0;
         int R = arr.length - 1;
         int index = -1;
-        while (L < R) {
+        while (L <= R) {
             int mid = L + ((R - L) >> 1);
             if (arr[mid] >= value) {
                 index = mid;
